@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import { userRouter } from './router/userRouter';
 import { NotFoundError } from './errors/notFoundError';
 import { errorHandler } from './middlewares/errorHandler';
+import  wishlistRouter  from './router/wishlistRouter';
 const app = express();
 
 app.use(json())
@@ -16,6 +17,7 @@ app.use(cors({
     credentials:true
     }))
 app.use("/api/user",userRouter)
+app.use("/api/wishlist",wishlistRouter)
 app.all('*',(req,res)=>{
     throw new NotFoundError()
 });

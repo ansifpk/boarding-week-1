@@ -1,6 +1,10 @@
 
 export const userRoute = {
-    signIn:"/signIn",
-    signUp:"/signUp",
-    signOut:"/signOut",
+    signIn:"/user/signIn",
+    signUp:"/user/signUp",
+    signOut:"/user/signOut",
+    refreshTocken:"/user/refresh-token",
+} 
+export const wishlistRoute = {
+    wishlist:"/wishlist",
 } 

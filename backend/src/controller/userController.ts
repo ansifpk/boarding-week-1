@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import { userModel } from "../models/userModel";
 import { wishlistModel } from "../models/wishlist";
-import { validationResult } from "express-validator";
 import { compareHash, creatHash } from "../service/password";
 import { createAccessAndRefreshTocken } from "../service/tockens";
 import { BadRequestError } from "../errors/badRequestError";
+import { NotAuthorizedError } from "../errors/NotAuthorizedError";
+import { ForBiddenError } from "../errors/ForbiddenError";
 
 export const loginUser = async (req:Request,res:Response,next:NextFunction)=>{
    try {
@@ -77,56 +78,31 @@ export const signUpUser = async (req:Request,res:Response,next:NextFunction)=>{
    }
 }
 
-export const getWishlist = async (req:Request,res:Response,next:NextFunction)=>{
-   try {
-      const {userId} = req.params 
-      const user = await wishlistModel.findOne({userId:userId});
-      res.send({user})
-   } catch (error) {
-    console.error(error)
-   }
-}
-export const addWishlist = async (req:Request,res:Response,next:NextFunction)=>{
-   try {
-      const {userId} = req.params 
-      const {recipeId} = req.body;
-      const wishlist = wishlistModel.build({
-         userId,
-         recipes:[recipeId]
+export const refreshTocken = async(req:Request,res:Response,next:NextFunction) => {
+    try {
+     const refreshTocken  =  req.cookies?.refreshTocken;
+     const {userId} = req.params
+     if(!refreshTocken){
+      throw new ForBiddenError()
+     }
+       const tockens  = await createAccessAndRefreshTocken(userId);
+       res.cookie("accessTocken",tockens?.accessTocken,{
+         httpOnly:true,
+         secure:process.env.NODE_ENV !== 'development',
+         sameSite:'strict',
+         maxAge: 15 * 60 * 1000
       })
-      await wishlist.save();
-      res.send({wishlist})
-
-   } catch (error) {
-    console.error(error)
-    next(error)
-   }
-}
-export const handleWishlist = async (req:Request,res:Response,next:NextFunction)=>{
-   try {
-      const {userId} = req.params 
-      const {recipeId} = req.body;
-   
-      let user = await wishlistModel.findOne({
-         userId:userId,
-         recipes:{$in:[recipeId]}
-      });
-      if(user){
-         user = await wishlistModel.findOneAndUpdate({
-            userId:userId
-         },
-      {$pull:{recipes:recipeId}},{new:true});
-      }else{
-         user = await wishlistModel.findOneAndUpdate({
-            userId:userId
-         },
-      {$push:{recipes:recipeId}},{new:true});
-      }
-      res.send({user})
-   } catch (error) {
-    console.error(error)
-    next(error)
-   }
+      res.cookie("refreshTocken",tockens?.refreshTocken,{
+         httpOnly:true,
+         secure:process.env.NODE_ENV !== 'development',
+         sameSite:'strict',
+         maxAge:30 * 24 * 60 * 60 * 1000
+      })
+      
+    } catch (error) {
+      console.error(error);
+      next(error)
+    }
 }
 
 export const signOutUser = async(req:Request,res:Response,next:NextFunction)=>{

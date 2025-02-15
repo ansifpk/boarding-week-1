@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express"
-import {addWishlist, getWishlist, handleWishlist, loginUser, signOutUser, signUpUser} from '../controller/userController'
-import { body, validationResult } from "express-validator"
-import { ValidateRequestError } from "../errors/validateRequestError";
+import { loginUser, refreshTocken, signOutUser, signUpUser} from '../controller/userController'
+import { body } from "express-validator"
 import { ValidateRequest } from "../middlewares/validateRequest";
+import { isAuth } from "../middlewares/auth";
 const router = express.Router();
 
 
@@ -36,13 +36,9 @@ router.post('/signIn',
     ,
     signUpUser
 )
-.get('/wishlist/:userId',getWishlist)
-.post('/wishlist/:userId',
-    addWishlist
-)
-.patch('/wishlist/:userId',
-    handleWishlist
-)
+
+.post('/refresh-token/:userId',refreshTocken)
+
 .post('/signOut',
     signOutUser
 )

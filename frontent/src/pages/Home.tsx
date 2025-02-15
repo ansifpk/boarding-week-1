@@ -2,13 +2,19 @@ import Buttons from '@/components/Buttons'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { ICuisine } from '@/lib/types'
+import { currentUser } from '@/redux/slice'
 import axios from 'axios'
 import  { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 const Home = () => {
   // const [homePageRecipes,setHomePageRecipes] = useState([])
   const [homePageRecipes, setHomePageRecipes] = useState<{id:string,image:string,title:string}[]>([])
   const [categories,setCategories] = useState<ICuisine[]>([])
+  const userid = currentUser()
+  toast(`${userid}`)
+  console.log(userid);
+  
    useEffect(()=>{
      const fetching = async()=>{
         const { data } = await axios.get(`${import.meta.env.VITE_SPOONACULAR_API}/complexSearch?cuisine=Italian,Mexican,Indian,Chinese,French,Thai,Japanese,Greek,Spanish,Moroccan&number=6&apiKey=${import.meta.env.VITE_SPOONACULAR_API_KEY}`)
