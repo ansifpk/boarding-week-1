@@ -45,7 +45,7 @@ export const loginUser = async (req:Request,res:Response,next:NextFunction)=>{
 export const signUpUser = async (req:Request,res:Response,next:NextFunction)=>{
    try {
      
-      const {email,password,name} = req.body 
+      const {email,password} = req.body 
       const user = await userModel.findOne({email:email});
       if(user){
          throw new BadRequestError('Email ALready Registered')
@@ -54,12 +54,13 @@ export const signUpUser = async (req:Request,res:Response,next:NextFunction)=>{
            req.body.password = pass
            const user = userModel.build(req.body);
            await user.save()
-           const tockens = await createAccessAndRefreshTocken(user._id as string)
+           const {_id,name,email} = user;
+           const tockens = await createAccessAndRefreshTocken(_id as string)
             res.cookie("accessTocken",tockens?.accessTocken,{
                httpOnly:true,
                secure:process.env.NODE_ENV !== 'development',
                sameSite:'strict',
-               maxAge:30 * 24 * 60 * 60 * 1000
+               maxAge: 15 * 60 * 1000
             })
             res.cookie("refreshTocken",tockens?.refreshTocken,{
                httpOnly:true,
@@ -68,7 +69,7 @@ export const signUpUser = async (req:Request,res:Response,next:NextFunction)=>{
                maxAge:30 * 24 * 60 * 60 * 1000
             })
 
-           res.send({success:true,user:user})
+           res.send({success:true,user:{_id,email,name}})
       }
    } catch (error) {
     console.error(error)

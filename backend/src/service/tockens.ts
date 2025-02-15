@@ -2,8 +2,12 @@ import jwt from 'jsonwebtoken'
 
 export const createAccessAndRefreshTocken = async(_id:string) => {
     try {
-        const accessTocken = jwt.sign({_id},process.env.JWT_ACCESS_SECRET!)
-        const refreshTocken = jwt.sign({_id},process.env.JWT_REFRESH_SECRET!)
+        const accessTocken = jwt.sign({_id},process.env.JWT_ACCESS_SECRET!,{
+            expiresIn:'15m'
+        })
+        const refreshTocken = jwt.sign({_id},process.env.JWT_REFRESH_SECRET!,{
+            expiresIn:'30d'
+        })
         return {accessTocken,refreshTocken}
     } catch (error) {
         console.error(error)
