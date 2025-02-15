@@ -14,6 +14,7 @@ export interface ICuisine{
 export interface IRecipe{
     id:number,
     title:string,
+    imageType:string,
     image:string,
     sourceName:string,
     readyInMinutes:number,
@@ -22,11 +23,11 @@ export interface IRecipe{
     aggregateLikes:number,
     extendedIngredients:{
         name:string
-    },
+    }[],
     summary:string,
     instructions:string,
     analyzedInstructions:{
-      strps:{
+      steps:{
         number:number,
         step:string,
         ingredients:{

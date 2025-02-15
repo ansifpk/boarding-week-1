@@ -55,9 +55,7 @@ const LoginForm = () => {
             toast(response.response.data.message)
         }
       }else{
-       const data = await doRequest()
-     
-       
+        await doRequest();
       }
   };
   const googleLogin = useGoogleLogin({
@@ -70,6 +68,8 @@ const LoginForm = () => {
           }
         );
         const res  = await signIn(userInfo.data.email,userInfo.data.id)
+         console.log("google user",res);
+         
         if(res.success){
             navigate("/home")
         }else{
