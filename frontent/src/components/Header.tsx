@@ -1,13 +1,12 @@
 import useRequest from '@/hooks/useRequest'
+import { IUser } from '@/lib/types'
 import { removeUser } from '@/redux/slice'
 import { userRoute } from '@/service/endPoints'
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
-    const userId = useSelector((state:{_id:string})=>state._id)
-    console.log(userId)
+    const userId = useSelector((state:IUser)=>state._id)
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const {doRequest} = useRequest({

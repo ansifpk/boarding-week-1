@@ -14,7 +14,7 @@ const Home = () => {
         const { data } = await axios.get(`${import.meta.env.VITE_SPOONACULAR_API}/complexSearch?cuisine=Italian,Mexican,Indian,Chinese,French,Thai,Japanese,Greek,Spanish,Moroccan&number=6&apiKey=${import.meta.env.VITE_SPOONACULAR_API_KEY}`)
         setCategories(data.results)
       }
-     fetching()
+    //  fetching()
   },[]) 
   return (
     <div className='bg-pink-50'>
@@ -25,11 +25,11 @@ const Home = () => {
         {/* welcome recipe start */}
        <div className='flex justify-center gap-5 m-4'>
         <div className='flex flex-col h-[400px] w-25 items-center'>
-          <img src={`https://img.spoonacular.com/recipes/639333-636x393.jpg`} alt={"recipe.title"} className='w-full h-full object-cover' />
+          {/* <img src={`https://img.spoonacular.com/recipes/639333-636x393.jpg`} alt={"recipe.title"} className='w-full h-full object-cover' /> */}
           <span className='font-bold bg-amber-300 p-2'>VEGETARIAN</span>
         </div>
         <div className='flex flex-col h-[400px] w-25 items-center'>
-          <img src={`https://img.spoonacular.com/recipes/982376-636x393.jpg`} alt={"recipe.title"} className='w-full h-full object-cover' />
+          {/* <img src={`https://img.spoonacular.com/recipes/982376-636x393.jpg`} alt={"recipe.title"} className='w-full h-full object-cover' /> */}
           <span className='font-bold bg-amber-300 p-2'>NON-VEGETARIAN</span>
         </div>
        </div>

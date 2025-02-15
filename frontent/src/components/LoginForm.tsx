@@ -55,7 +55,9 @@ const LoginForm = () => {
             toast(response.response.data.message)
         }
       }else{
-        await doRequest();
+        const data =  await doRequest();
+        dispatch(setUser(data.user))
+        
       }
   };
   const googleLogin = useGoogleLogin({
