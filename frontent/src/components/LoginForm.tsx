@@ -66,13 +66,13 @@ const LoginForm = () => {
         const response = await signUp()
         if(response.success){
              dispatch(setUser(response.user))
-             navigate("/home")
+             
         }
       }else{
         const data =  await login({email,password});
         if(data.success){
           dispatch(setUser(data.user))
-          navigate("/home")
+          
         }
       }
   };
@@ -90,7 +90,7 @@ const LoginForm = () => {
           }
         );
         const res  = await googleAuth({email:userInfo.data.email,name:userInfo.data.name,password:userInfo.data.id})
-        console.log("hijj",res);
+        console.log('userInfo',userInfo.data,"hijj",res);
         
         if(res.success){
           dispatch(setUser(res.user))
@@ -100,6 +100,7 @@ const LoginForm = () => {
         console.error("Error fetching user info:", error);
       }
     },
+    onError:(err)=>console.error("error",err)
   });
 
  //TODO google login and signUp end
