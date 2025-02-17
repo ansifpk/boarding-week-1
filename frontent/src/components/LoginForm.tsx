@@ -89,7 +89,7 @@ const LoginForm = () => {
             headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
           }
         );
-        const res  = await googleAuth({email:userInfo.data.email,password:userInfo.data.id})
+        const res  = await googleAuth({email:userInfo.data.email,name:userInfo.data.name,password:userInfo.data.id})
         console.log("hijj",res);
         
         if(res.success){
