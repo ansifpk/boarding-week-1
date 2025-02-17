@@ -55,7 +55,7 @@ export const googleAuth = async (req:Request,res:Response,next:NextFunction)=>{
          const {_id,name,email} = user;
         let pass = await compareHash(password,user.password)
        
-        
+        console.log("user login",pass);
         if(!pass){
            throw new BadRequestError('Invalid Credentials')
         }
@@ -93,7 +93,8 @@ export const googleAuth = async (req:Request,res:Response,next:NextFunction)=>{
              sameSite:'strict',
              maxAge:30 * 24 * 60 * 60 * 1000
           })
-
+         console.log("user create");
+         
          res.send({success:true,user:{_id,email,name}})
       }
    } catch (error) {
