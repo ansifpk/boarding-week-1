@@ -9,14 +9,14 @@ import { ForBiddenError } from "../errors/ForbiddenError";
 
 export const loginUser = async (req:Request,res:Response,next:NextFunction)=>{
    try {
-   
+      
        const {email,password} = req.body 
        const user = await userModel.findOne({email:email});
        if(user){
           
           const {_id,name,email} = user;
          let pass = await compareHash(password,user.password)
-      
+        
          
          if(!pass){
             throw new BadRequestError('Invalid Credentials')

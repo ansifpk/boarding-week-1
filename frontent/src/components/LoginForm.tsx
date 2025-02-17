@@ -72,8 +72,7 @@ const LoginForm = () => {
           }
         );
         const res  = await signIn(userInfo.data.email,userInfo.data.id)
-         console.log('userInfo',userInfo,"google user",res);
-         
+        
         if(res.success){
             navigate("/home")
         }else{
