@@ -14,7 +14,6 @@ import {Eye , EyeOff} from 'lucide-react'
 import { useGoogleLogin } from "@react-oauth/google";
  import axios from 'axios'
 import { useNavigate } from "react-router-dom";
-import { signIn, signUp } from "@/Api/userApi";
 import { toast } from "sonner"
 import { useDispatch } from "react-redux"
 import { setUser } from "@/redux/slice";
@@ -36,11 +35,19 @@ const LoginForm = () => {
   });
   
   const navigate = useNavigate();
-  const {doRequest:loginGoogle,errors:errorLogin} = useRequest({
+  const {doRequest:login,errors:errorLogin} = useRequest({
     url:userRoute.signIn,
     method:'post',
     body:{
        email,password
+    },
+    onSuccess:()=>navigate("/home")
+});
+  const {doRequest:signUp,errors:errorSignUp} = useRequest({
+    url:userRoute.signUp,
+    method:'post',
+    body:{
+       email,name,password
     },
     onSuccess:()=>navigate("/home")
 });
@@ -53,17 +60,17 @@ const LoginForm = () => {
   const handleSubmit = async(e: FormEvent) => {
       e.preventDefault();
       if(page=="signUp"){
-        const response = await signUp(email,name,password)
+        const response = await signUp()
         if(response.success){
-            
+             console.log(response.user);
+             dispatch(setUser(response.user))
+             
             navigate("/home")
         }else{
             toast(response.response.data.message)
         }
       }else{
-        const data =  await loginGoogle({
-          email,password
-       });
+        const data =  await login({email,password});
         dispatch(setUser(data.user))
         
       }
@@ -91,6 +98,7 @@ const LoginForm = () => {
   });
   useEffect(()=>{
     errorLogin?.length!>0&&errorLogin!.map((err)=>toast.error(err.message))
+    errorSignUp?.length!>0&&errorSignUp!.map((err)=>toast.error(err.message))
     errorGoogle?.length!>0&&errorGoogle!.map((err)=>toast.error(err.message))
   },[errorLogin,errorGoogle])
  

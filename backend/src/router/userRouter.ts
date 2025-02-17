@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express"
-import { loginUser, refreshTocken, signOutUser, signUpUser} from '../controller/userController'
+import { googleAuth, loginUser, refreshTocken, signOutUser, signUpUser} from '../controller/userController'
 import { body } from "express-validator"
 import { ValidateRequest } from "../middlewares/validateRequest";
 import { isAuth } from "../middlewares/auth";
@@ -30,7 +30,7 @@ router.post('/googleAuth',
    ],
    ValidateRequest
    ,
-    loginUser
+    googleAuth
 )
 .post('/signUp',
     [

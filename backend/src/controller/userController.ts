@@ -45,6 +45,62 @@ export const loginUser = async (req:Request,res:Response,next:NextFunction)=>{
      next(error)
    }
 }
+
+export const googleAuth = async (req:Request,res:Response,next:NextFunction)=>{
+   try {
+      const {email,password} = req.body 
+      const user = await userModel.findOne({email:email});
+      if(user){
+         
+         const {_id,name,email} = user;
+        let pass = await compareHash(password,user.password)
+       
+        
+        if(!pass){
+           throw new BadRequestError('Invalid Credentials')
+        }
+        const tockens = await createAccessAndRefreshTocken(_id as string)
+
+           res.cookie("accessTocken",tockens?.accessTocken,{
+              httpOnly:true,
+              secure:process.env.NODE_ENV !== 'development',
+              sameSite:'strict',
+              maxAge: 1 * 60 * 1000
+           })
+           res.cookie("refreshTocken",tockens?.refreshTocken,{
+              httpOnly:true,
+              secure:process.env.NODE_ENV !== 'development',
+              sameSite:'strict',
+              maxAge:30 * 24 * 60 * 60 * 1000
+           })
+        res.send({success:true,user:{_id,email,name}})
+      }else{
+         const pass = await creatHash(password);
+         req.body.password = pass
+         const user = userModel.build(req.body);
+         await user.save()
+         const {_id,name,email} = user;
+         const tockens = await createAccessAndRefreshTocken(_id as string)
+          res.cookie("accessTocken",tockens?.accessTocken,{
+             httpOnly:true,
+             secure:process.env.NODE_ENV !== 'development',
+             sameSite:'strict',
+             maxAge: 1 * 60 * 1000
+          })
+          res.cookie("refreshTocken",tockens?.refreshTocken,{
+             httpOnly:true,
+             secure:process.env.NODE_ENV !== 'development',
+             sameSite:'strict',
+             maxAge:30 * 24 * 60 * 60 * 1000
+          })
+
+         res.send({success:true,user:{_id,email,name}})
+      }
+   } catch (error) {
+      console.error(error)
+      next(error)
+   }
+}
 export const signUpUser = async (req:Request,res:Response,next:NextFunction)=>{
    try {
      
