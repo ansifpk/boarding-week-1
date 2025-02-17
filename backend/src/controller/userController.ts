@@ -77,7 +77,7 @@ export const googleAuth = async (req:Request,res:Response,next:NextFunction)=>{
            })
         res.send({success:true,user:{_id,email,name}})
       }else{
-         const pass = await creatHash(password);
+         const pass = await creatHash(`${password}`);
          req.body.password = pass
          const user = userModel.build(req.body);
          await user.save()
