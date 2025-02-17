@@ -36,12 +36,18 @@ const LoginForm = () => {
   });
   
   const navigate = useNavigate();
-  const {doRequest,errors} = useRequest({
+  const {doRequest:loginGoogle,errors:errorLogin} = useRequest({
     url:userRoute.signIn,
     method:'post',
     body:{
        email,password
     },
+    onSuccess:()=>navigate("/home")
+});
+  const {doRequest:googleAuth,errors:errorGoogle} = useRequest({
+    url:userRoute.googleAuth,
+    method:'post',
+    body:{},
     onSuccess:()=>navigate("/home")
 });
   const handleSubmit = async(e: FormEvent) => {
@@ -55,7 +61,7 @@ const LoginForm = () => {
             toast(response.response.data.message)
         }
       }else{
-        const data =  await doRequest({
+        const data =  await loginGoogle({
           email,password
        });
         dispatch(setUser(data.user))
@@ -71,7 +77,7 @@ const LoginForm = () => {
             headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
           }
         );
-        const res  = await signIn(userInfo.data.email,userInfo.data.id)
+        const res  = await googleAuth({email:userInfo.data.email,password:userInfo.data.id})
         
         if(res.success){
             navigate("/home")
@@ -84,8 +90,9 @@ const LoginForm = () => {
     },
   });
   useEffect(()=>{
-    errors?.length!>0&&errors!.map((err)=>toast.error(err.message))
-  },[errors])
+    errorLogin?.length!>0&&errorLogin!.map((err)=>toast.error(err.message))
+    errorGoogle?.length!>0&&errorGoogle!.map((err)=>toast.error(err.message))
+  },[errorLogin,errorGoogle])
  
 
   return (
