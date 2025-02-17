@@ -19,18 +19,7 @@ router.post('/signIn',
    ,
     loginUser
 )
-router.post('/googleAuth',
-   [ 
-    body("email")
-    .isEmail()
-    .withMessage("Invalid Email or Password"),
-    body("password")
-    .notEmpty()
-    .withMessage("invalid Email or Password"),
-   ]
-   ,
-    googleAuth
-)
+router.post('/googleAuth',googleAuth)
 .post('/signUp',
     [
         body("email")
