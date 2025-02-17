@@ -57,24 +57,29 @@ const LoginForm = () => {
     body:{},
     onSuccess:()=>navigate("/home")
 });
+  
+ //TODO login and signUp
+
   const handleSubmit = async(e: FormEvent) => {
       e.preventDefault();
       if(page=="signUp"){
         const response = await signUp()
         if(response.success){
-             console.log(response.user);
              dispatch(setUser(response.user))
-             
-            navigate("/home")
-        }else{
-            toast(response.response.data.message)
+             navigate("/home")
         }
       }else{
         const data =  await login({email,password});
-        dispatch(setUser(data.user))
-        
+        if(data.success){
+          dispatch(setUser(data.user))
+          navigate("/home")
+        }
       }
   };
+
+  //TODO login and signUp
+
+  //TODO google login and signUp
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
@@ -87,21 +92,24 @@ const LoginForm = () => {
         const res  = await googleAuth({email:userInfo.data.email,password:userInfo.data.id})
         
         if(res.success){
+          dispatch(setUser(res.user))
             navigate("/home")
-        }else{
-            toast(res.response.data.message)
         }
       } catch (error) {
         console.error("Error fetching user info:", error);
       }
     },
   });
+  
+ //TODO google login and signUp end
+
+  //! errors start
   useEffect(()=>{
     errorLogin?.length!>0&&errorLogin!.map((err)=>toast.error(err.message))
     errorSignUp?.length!>0&&errorSignUp!.map((err)=>toast.error(err.message))
     errorGoogle?.length!>0&&errorGoogle!.map((err)=>toast.error(err.message))
-  },[errorLogin,errorGoogle])
- 
+  },[errorLogin,errorSignUp,errorGoogle])
+  //! errors end
 
   return (
    <div >
