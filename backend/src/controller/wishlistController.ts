@@ -5,8 +5,7 @@ import { wishlistModel } from "../models/wishlist";
 export const getWishlist = async (req:Request,res:Response,next:NextFunction)=>{
     try {
        const {userId} = req.params
-       console.log(userId);
-       
+     
        const wishlist = await wishlistModel.findOne({userId:userId});
        res.send({wishlist})
     } catch (error) {
@@ -17,6 +16,7 @@ export const getWishlist = async (req:Request,res:Response,next:NextFunction)=>{
     try {
        const {userId} = req.params 
        const {recipeId} = req.body;
+     
        const wishlist = wishlistModel.build({
           userId,
           recipes:[recipeId]
@@ -33,23 +33,27 @@ export const getWishlist = async (req:Request,res:Response,next:NextFunction)=>{
     try {
        const {userId} = req.params 
        const {recipeId} = req.body;
-    
-       let user = await wishlistModel.findOne({
+        
+       let wishlist = await wishlistModel.findOne({
           userId:userId,
           recipes:{$in:[recipeId]}
        });
-       if(user){
-          user = await wishlistModel.findOneAndUpdate({
+      
+       if(wishlist){
+         
+         
+         wishlist = await wishlistModel.findOneAndUpdate({
              userId:userId
           },
        {$pull:{recipes:recipeId}},{new:true});
        }else{
-          user = await wishlistModel.findOneAndUpdate({
+        
+         wishlist = await wishlistModel.findOneAndUpdate({
              userId:userId
           },
        {$push:{recipes:recipeId}},{new:true});
        }
-       res.send({user})
+       res.send({wishlist})
     } catch (error) {
      console.error(error)
      next(error)

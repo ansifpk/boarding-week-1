@@ -16,6 +16,9 @@ export const loginUser = async (req:Request,res:Response,next:NextFunction)=>{
           
           const {_id,name,email} = user;
          let pass = await compareHash(password,user.password)
+      
+         console.log(pass);
+         
          if(!pass){
             throw new BadRequestError('Invalid Credentials')
          }

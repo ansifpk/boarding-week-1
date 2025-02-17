@@ -6,15 +6,19 @@ import ErrorsComp from '../components/ErrorsComp'
 
 export default ({url,method,body,onSuccess}:{
     url: string; 
-    method:  "get" | "post" | "put" | "delete"; 
+    method:  "get" | "post" | "put" | "delete" | "patch"; 
     body: object; 
     onSuccess: () => void
  }) => {
     const [errors,setError] = useState<null|{message:string}[]>(null)
    
-    const doRequest =  async() => {
+    const doRequest =  async(data?:object) => {
       try {
        setError(null)
+
+         if(method !== "get"){
+          body = data!
+         }
          const response = await client[method](url,body)
          if(onSuccess){
            onSuccess()

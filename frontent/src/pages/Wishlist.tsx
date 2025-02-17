@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import useRequest from "@/hooks/useRequest";
-import { IRecipe, IUser } from "@/lib/types";
+import { IRecipe, IUser, IWishlist } from "@/lib/types";
 import { wishlistRoute } from "@/service/endPoints";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -24,7 +24,7 @@ const Wishlist = () => {
   const [search, setSearch] = useState("");
   const [debouns, setDebouns] = useState("");
   const [recipe, setRecipe] = useState<IRecipe[]>([]);
-  const [wishlist, setWishlist] = useState<IRecipe[]>([]);
+  const [wishlist, setWishlist] = useState<IWishlist[]>([]);
   const id = useSelector((state: IUser) => state._id);
   const { doRequest } = useRequest({
     url: `${wishlistRoute.wishlist}/${id}`,
@@ -35,14 +35,14 @@ const Wishlist = () => {
   useEffect(() => {
     
     const fetching = async ()=>{
-      console.log("fetching");
+     
       const data = await doRequest()
       if(data.wishlist){
-        console.log(wishlist)
+        console.log('wishlist',data.wishlist)
         setWishlist(data.wishlist)
       }
     }
-    fetching()
+    // fetching()
   }, []);
 
   useEffect(() => {
@@ -116,7 +116,7 @@ const Wishlist = () => {
 
         {/* body part end  */}
 
-        <Cards arr={wishlist} />
+        <Cards arr={null} />
 
         {/* body part end  */}
 

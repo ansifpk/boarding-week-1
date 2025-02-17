@@ -11,7 +11,10 @@ export const creatHash = async(password:string)=>{
 
 export const compareHash = async(password:string,hashedPassword:string)=>{
     try {
+      
          const comparedPass = await bcrypt.compare(password,hashedPassword);
+         console.log(password,hashedPassword);
+        
          return comparedPass;
     } catch (error) {
         console.error(error)

@@ -14,7 +14,7 @@ export interface ICuisine{
 export interface IWishlist{
     
     userId:string,
-    recipes:string[],
+    recipes:number[],
     createdAt:string
     
 }

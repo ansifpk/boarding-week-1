@@ -20,7 +20,7 @@ const wishlistScheem = new mongoose.Schema({
         required:true
     },
     recipes:[{
-        type:String,
+        type:Number,
         required:true
     }]
 },{

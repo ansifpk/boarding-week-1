@@ -55,7 +55,9 @@ const LoginForm = () => {
             toast(response.response.data.message)
         }
       }else{
-        const data =  await doRequest();
+        const data =  await doRequest({
+          email,password
+       });
         dispatch(setUser(data.user))
         
       }

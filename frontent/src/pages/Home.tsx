@@ -22,7 +22,7 @@ const Home = () => {
    
     
   },[]) 
-  console.log(categories);
+  // console.log(categories);
   return (
     <div className='bg-pink-50'>
        <Header/>
