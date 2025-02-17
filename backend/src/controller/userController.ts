@@ -49,6 +49,8 @@ export const loginUser = async (req:Request,res:Response,next:NextFunction)=>{
 export const googleAuth = async (req:Request,res:Response,next:NextFunction)=>{
    try {
       const {email,password} = req.body 
+      console.log(req.body,"user login");
+      
       const user = await userModel.findOne({email:email});
       if(user){
          
