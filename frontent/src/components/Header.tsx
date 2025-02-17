@@ -27,7 +27,7 @@ const Header = () => {
          <li  onClick={()=>navigate('/recipe')}   className='cursor-pointer font-bold'>Recipe</li>
          {userId?(
         <>
-         <li onClick={()=>navigate("/wishlist")} className='cursor-pointer font-bold'>WIshlist</li>
+         <li onClick={()=>navigate("/wishlist")} className='cursor-pointer font-bold'>Wishlist</li>
          <li onClick={handleLogout} className='cursor-pointer underline font-bold'>Logout</li>
         </>
          ):(

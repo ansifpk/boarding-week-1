@@ -1,23 +1,41 @@
+import BrickLoader from '@/components/BrickLoader'
 import Buttons from '@/components/Buttons'
 import Cards from '@/components/Cards'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { Input } from '@/components/ui/input'
+
+import { IUser } from '@/lib/types'
 import axios from 'axios'
+
 import  { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 
 const Recipe = () => {
     const [search,setSearch] = useState("");
     const [datas,setDatas] = useState([]);
-    
+    const id = useSelector((state: IUser) => state._id);
+   
+  
     useEffect(()=>{
         const fetching = async () =>{
-         const {data} = await axios.get(`${import.meta.env.VITE_SPOONACULAR_API}/random?number=10&apiKey=${import.meta.env.VITE_SPOONACULAR_API_KEY}`)
-         setDatas(data.recipes);   
+         const {data} = await axios.get(`${import.meta.env.VITE_SPOONACULAR_API}/complexSearch?sort=popularity&number=10&apiKey=${import.meta.env.VITE_SPOONACULAR_API_KEY}`)
+         setDatas(data.results);   
+        
+         
         }
-        fetching()
-    },[])
+        // fetching()
+    },[]);
+
+    if(!datas.length){
+      return(
+        <>
+         <BrickLoader/>
+        </>
+      )
+    }
+
   return (
     <div className='bg-pink-100'>
         <Header />
@@ -34,6 +52,9 @@ const Recipe = () => {
        {/* search and about part end */}
 
        {/* list recipes start */}
+        <div className=' text-center mt-4'>
+           <span className='text-3xl font-bold'>Most Liked Recipes</span>
+        </div>
         <Cards arr={datas} />
        {/* list recipes end */}
         

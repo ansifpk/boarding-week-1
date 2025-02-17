@@ -11,17 +11,18 @@ const Home = () => {
   // const [homePageRecipes,setHomePageRecipes] = useState([])
   const [homePageRecipes, setHomePageRecipes] = useState<{id:string,image:string,title:string}[]>([])
   const [categories,setCategories] = useState<ICuisine[]>([])
-  const userid = currentUser()
-  toast(`${userid}`)
-  console.log(userid);
+ 
   
    useEffect(()=>{
      const fetching = async()=>{
         const { data } = await axios.get(`${import.meta.env.VITE_SPOONACULAR_API}/complexSearch?cuisine=Italian,Mexican,Indian,Chinese,French,Thai,Japanese,Greek,Spanish,Moroccan&number=6&apiKey=${import.meta.env.VITE_SPOONACULAR_API_KEY}`)
         setCategories(data.results)
       }
-    //  fetching()
+     fetching()
+   
+    
   },[]) 
+  console.log(categories);
   return (
     <div className='bg-pink-50'>
        <Header/>
@@ -46,8 +47,8 @@ const Home = () => {
         {categories.map((cate,index)=>(
           <li key={index} className=' w-[100px]   list-none items-center justify-center'>
              <div className='flex  h-[100px] w-[100px]  items-center'>
-               {/* <img src={`https://img.spoonacular.com/recipes/982376-636x393.jpg`} className='w-full h-full object-cover rounded-full' alt="" /> */}
-               <img src={cate.image} className='w-full h-full object-cover rounded-full' alt="" />
+               <img src={`https://img.spoonacular.com/recipes/982376-636x393.jpg`} className='w-full h-full object-cover rounded-full' alt="" />
+               {/* <img src={cate.image} className='w-full h-full object-cover rounded-full' alt="" /> */}
                </div>
                 <span className='font-semibold text-sm'>{cate.title}</span>
           </li>

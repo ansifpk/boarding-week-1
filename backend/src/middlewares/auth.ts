@@ -23,6 +23,7 @@ export const isAuth = async(req:Request,res:Response,next:NextFunction) =>{
           }
           next();
     } catch (error) {
+        console.log("autherror",error)
         next(error)
     }
 }

@@ -5,9 +5,10 @@ import { wishlistModel } from "../models/wishlist";
 export const getWishlist = async (req:Request,res:Response,next:NextFunction)=>{
     try {
        const {userId} = req.params
-        
-       const user = await wishlistModel.findOne({userId:userId});
-       res.send({user})
+       console.log(userId);
+       
+       const wishlist = await wishlistModel.findOne({userId:userId});
+       res.send({wishlist})
     } catch (error) {
      console.error(error)
     }

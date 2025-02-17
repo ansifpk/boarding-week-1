@@ -22,6 +22,7 @@ export const verifyAccessTocken = async(_id:string) => {
         return accessTocken
     } catch (error) {
         console.error(error)
+        
     }
 }
 export const verifyRefreshTocken = async(userId:string) => {

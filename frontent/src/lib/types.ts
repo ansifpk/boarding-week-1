@@ -11,6 +11,13 @@ export interface ICuisine{
     spoonacularScore:number,
     aggregateLikes:number,
 }
+export interface IWishlist{
+    
+    userId:string,
+    recipes:string[],
+    createdAt:string
+    
+}
 export interface IRecipe{
     id:number,
     title:string,

@@ -42,9 +42,7 @@ const RecipeDetailes = () => {
             </div>
             <div className=" w-full">
               <img
-                src={`${import.meta.env.VITE_SPOONACULAR_API}/${
-                  recipe?.id
-                }-636x393.${recipe?.imageType}`}
+                src={recipe?.image}
                 alt={"recipe.title"}
                 className="w-full h-full object-cover"
               />
