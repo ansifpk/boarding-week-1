@@ -27,8 +27,7 @@ router.post('/googleAuth',
     body("password")
     .notEmpty()
     .withMessage("invalid Email or Password"),
-   ],
-   ValidateRequest
+   ]
    ,
     googleAuth
 )
