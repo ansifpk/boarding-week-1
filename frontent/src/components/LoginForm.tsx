@@ -90,6 +90,7 @@ const LoginForm = () => {
           }
         );
         const res  = await googleAuth({email:userInfo.data.email,password:userInfo.data.id})
+        console.log("hi",res);
         
         if(res.success){
           dispatch(setUser(res.user))
@@ -100,7 +101,7 @@ const LoginForm = () => {
       }
     },
   });
-  
+
  //TODO google login and signUp end
 
   //! errors start
