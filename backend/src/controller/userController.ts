@@ -27,7 +27,7 @@ export const loginUser = async (req:Request,res:Response,next:NextFunction)=>{
                httpOnly:true,
                secure:process.env.NODE_ENV !== 'development',
                sameSite:'none',
-               maxAge: 1 * 60 * 1000
+               maxAge: 15 * 60 * 1000
             })
             res.cookie("refreshTocken",tockens?.refreshTocken,{
                httpOnly:true,
@@ -67,7 +67,7 @@ export const googleAuth = async (req:Request,res:Response,next:NextFunction)=>{
               httpOnly:true,
               secure:process.env.NODE_ENV !== 'development',
               sameSite:'none',
-              maxAge: 1 * 60 * 1000
+              maxAge: 15 * 60 * 1000
            })
            res.cookie("refreshTocken",tockens?.refreshTocken,{
               httpOnly:true,
@@ -87,7 +87,7 @@ export const googleAuth = async (req:Request,res:Response,next:NextFunction)=>{
              httpOnly:true,
              secure:process.env.NODE_ENV !== 'development',
              sameSite:'none',
-             maxAge: 1 * 60 * 1000
+             maxAge: 15 * 60 * 1000
           })
           res.cookie("refreshTocken",tockens?.refreshTocken,{
              httpOnly:true,
@@ -122,7 +122,7 @@ export const signUpUser = async (req:Request,res:Response,next:NextFunction)=>{
                httpOnly:true,
                secure:process.env.NODE_ENV !== 'development',
                sameSite:'none',
-               maxAge: 1 * 60 * 1000
+               maxAge: 15 * 60 * 1000
             })
             res.cookie("refreshTocken",tockens?.refreshTocken,{
                httpOnly:true,
@@ -155,7 +155,7 @@ export const refreshTocken = async(req:Request,res:Response,next:NextFunction) =
          httpOnly:true,
          secure:process.env.NODE_ENV !== 'development',
          sameSite:"none",
-         maxAge: 1 * 60 * 1000
+         maxAge: 15 * 60 * 1000
       })
       res.cookie("refreshTocken",tockens?.refreshTocken,{
          httpOnly:true,

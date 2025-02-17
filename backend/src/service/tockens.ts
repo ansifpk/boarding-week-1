@@ -5,7 +5,7 @@ interface paylod{
 export const createAccessAndRefreshTocken = async(_id:string) => {
     try {
         const accessTocken = jwt.sign({_id},process.env.JWT_ACCESS_SECRET!,{
-            expiresIn:'1m'
+            expiresIn:'15m'
         })
         const refreshTocken = jwt.sign({_id},process.env.JWT_REFRESH_SECRET!,{
             expiresIn:'30d'
