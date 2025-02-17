@@ -17,7 +17,6 @@ export const loginUser = async (req:Request,res:Response,next:NextFunction)=>{
           const {_id,name,email} = user;
          let pass = await compareHash(password,user.password)
       
-         console.log(pass);
          
          if(!pass){
             throw new BadRequestError('Invalid Credentials')
@@ -28,7 +27,7 @@ export const loginUser = async (req:Request,res:Response,next:NextFunction)=>{
                httpOnly:true,
                secure:process.env.NODE_ENV !== 'development',
                sameSite:'strict',
-               maxAge:30 * 24 * 60 * 60 * 1000
+               maxAge: 1 * 60 * 1000
             })
             res.cookie("refreshTocken",tockens?.refreshTocken,{
                httpOnly:true,
@@ -64,7 +63,7 @@ export const signUpUser = async (req:Request,res:Response,next:NextFunction)=>{
                httpOnly:true,
                secure:process.env.NODE_ENV !== 'development',
                sameSite:'strict',
-               maxAge: 15 * 60 * 1000
+               maxAge: 1 * 60 * 1000
             })
             res.cookie("refreshTocken",tockens?.refreshTocken,{
                httpOnly:true,
@@ -84,24 +83,28 @@ export const signUpUser = async (req:Request,res:Response,next:NextFunction)=>{
 export const refreshTocken = async(req:Request,res:Response,next:NextFunction) => {
     try {
      const refreshTocken  =  req.cookies?.refreshTocken;
+     console.log("refresh nokkan");
+     
      const {userId} = req.params
      if(!refreshTocken){
       throw new ForBiddenError()
      }
        const tockens  = await createAccessAndRefreshTocken(userId);
+       console.log(tockens?.accessTocken);
+       
        res.cookie("accessTocken",tockens?.accessTocken,{
          httpOnly:true,
          secure:process.env.NODE_ENV !== 'development',
-         sameSite:'strict',
-         maxAge: 15 * 60 * 1000
+         sameSite:"none",
+         maxAge: 1 * 60 * 1000
       })
       res.cookie("refreshTocken",tockens?.refreshTocken,{
          httpOnly:true,
          secure:process.env.NODE_ENV !== 'development',
-         sameSite:'strict',
+         sameSite:"none",
          maxAge:30 * 24 * 60 * 60 * 1000
       })
-      
+      console.log("refresh sett akky",req.cookies);
     } catch (error) {
       console.error(error);
       next(error)

@@ -7,7 +7,6 @@ import {
   PaginationItem,
   PaginationPrevious,
   PaginationLink,
-  PaginationEllipsis,
   PaginationNext,
 } from "@/components/ui/pagination";
 import { IRecipe } from "@/lib/types";
@@ -27,7 +26,7 @@ const AllRecipes = () => {
       );
       setRecipe(data.results);
     };
-    // fetching()
+    fetching()
   }, [count]);
 
   if(!recipe.length){

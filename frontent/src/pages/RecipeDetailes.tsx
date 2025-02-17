@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import { IRecipe } from "@/lib/types";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const RecipeDetailes = () => {

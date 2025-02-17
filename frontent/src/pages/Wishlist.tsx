@@ -1,4 +1,4 @@
-import Buttons from "@/components/Buttons";
+
 import Cards from "@/components/Cards";
 import Header from "@/components/Header";
 import SmallCard from "@/components/SmallCard";
@@ -42,7 +42,7 @@ const Wishlist = () => {
         setWishlist(data.wishlist)
       }
     }
-    // fetching()
+    fetching()
   }, []);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const Wishlist = () => {
         setRecipe(data.results)
     }
     };
-    // fetching();
+    fetching();
   }, [debouns]);
   return (
     <div className={`bg-pink-50 ${ !wishlist.length&&"h-screen" } `}>

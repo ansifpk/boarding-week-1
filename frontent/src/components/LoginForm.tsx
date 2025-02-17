@@ -15,7 +15,7 @@ import { useGoogleLogin } from "@react-oauth/google";
  import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import { signIn, signUp } from "@/Api/userApi";
-import { toast, useSonner } from "sonner"
+import { toast } from "sonner"
 import { useDispatch } from "react-redux"
 import { setUser } from "@/redux/slice";
 import useRequest from "@/hooks/useRequest";
@@ -29,7 +29,7 @@ const LoginForm = () => {
   const [page, setPage] = useState("signIn");
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch()
-  const [error, setError] = useState({
+  const [error] = useState({
     email:false,
     password:false,
     name:false,

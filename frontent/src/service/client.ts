@@ -2,8 +2,7 @@ import axios from "axios";
 import { userRoute } from "./endPoints";
 import { store } from "@/redux/store";
 import { removeUser } from "@/redux/slice";
-import { useSelector } from "react-redux";
-import { IUser } from "@/lib/types";
+
 
 const client = axios.create({
     baseURL:import.meta.env.VITE_BACKEND_URL,
@@ -22,6 +21,8 @@ client.interceptors.response.use(
             originalRequest._retry = true;
             try {
                 const user = store.getState();
+                console.log("ji");
+                
                 await client.post(`${userRoute.refreshTocken}/${user._id}`,{},{withCredentials:true})
                 return client(originalRequest);
             } catch (err) {

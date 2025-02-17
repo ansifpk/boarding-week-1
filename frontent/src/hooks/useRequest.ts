@@ -1,8 +1,5 @@
 import { client } from "@/service/client";
-import axios, { AxiosError, AxiosStatic } from "axios";
 import {  useState } from "react";
-import ErrorsComp from '../components/ErrorsComp'
-
 
 export default ({url,method,body,onSuccess}:{
     url: string; 
