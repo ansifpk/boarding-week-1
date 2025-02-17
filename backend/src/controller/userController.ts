@@ -26,13 +26,13 @@ export const loginUser = async (req:Request,res:Response,next:NextFunction)=>{
             res.cookie("accessTocken",tockens?.accessTocken,{
                httpOnly:true,
                secure:process.env.NODE_ENV !== 'development',
-               sameSite:'strict',
+               sameSite:'none',
                maxAge: 1 * 60 * 1000
             })
             res.cookie("refreshTocken",tockens?.refreshTocken,{
                httpOnly:true,
                secure:process.env.NODE_ENV !== 'development',
-               sameSite:'strict',
+               sameSite:'none',
                maxAge:30 * 24 * 60 * 60 * 1000
             })
          res.send({success:true,user:{_id,email,name}})
@@ -66,13 +66,13 @@ export const googleAuth = async (req:Request,res:Response,next:NextFunction)=>{
            res.cookie("accessTocken",tockens?.accessTocken,{
               httpOnly:true,
               secure:process.env.NODE_ENV !== 'development',
-              sameSite:'strict',
+              sameSite:'none',
               maxAge: 1 * 60 * 1000
            })
            res.cookie("refreshTocken",tockens?.refreshTocken,{
               httpOnly:true,
               secure:process.env.NODE_ENV !== 'development',
-              sameSite:'strict',
+              sameSite:'none',
               maxAge:30 * 24 * 60 * 60 * 1000
            })
         res.send({success:true,user:{_id,email,name}})
@@ -86,13 +86,13 @@ export const googleAuth = async (req:Request,res:Response,next:NextFunction)=>{
           res.cookie("accessTocken",tockens?.accessTocken,{
              httpOnly:true,
              secure:process.env.NODE_ENV !== 'development',
-             sameSite:'strict',
+             sameSite:'none',
              maxAge: 1 * 60 * 1000
           })
           res.cookie("refreshTocken",tockens?.refreshTocken,{
              httpOnly:true,
              secure:process.env.NODE_ENV !== 'development',
-             sameSite:'strict',
+             sameSite:'none',
              maxAge:30 * 24 * 60 * 60 * 1000
           })
          console.log("user create");
@@ -121,13 +121,13 @@ export const signUpUser = async (req:Request,res:Response,next:NextFunction)=>{
             res.cookie("accessTocken",tockens?.accessTocken,{
                httpOnly:true,
                secure:process.env.NODE_ENV !== 'development',
-               sameSite:'strict',
+               sameSite:'none',
                maxAge: 1 * 60 * 1000
             })
             res.cookie("refreshTocken",tockens?.refreshTocken,{
                httpOnly:true,
                secure:process.env.NODE_ENV !== 'development',
-               sameSite:'strict',
+               sameSite:'none',
                maxAge:30 * 24 * 60 * 60 * 1000
             })
 
