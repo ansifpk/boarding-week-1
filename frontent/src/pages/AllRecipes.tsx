@@ -50,7 +50,11 @@ const AllRecipes = () => {
       </div>
       <div className="flex">
          <div>
-           hi
+           <select>
+             <option>hye</option>
+             <option>bye</option>
+             <option>hi</option>
+           </select>
          </div>
          <div>
         {/* body part start */}
