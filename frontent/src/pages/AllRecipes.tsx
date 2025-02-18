@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 const AllRecipes = () => {
   const [count, setCount] = useState(1);
   const [pages] = useState(5229);
-  const [sort] = useState('');
+  const [sort,setSort] = useState('');
   const [recipe, setRecipe] = useState<IRecipe[]>([]);
   useEffect(() => {
     const fetching = async () => {
@@ -50,10 +50,11 @@ const AllRecipes = () => {
       </div>
       <div className="flex">
          <div>
-           <select>
-             <option>hye</option>
-             <option>bye</option>
-             <option>hi</option>
+           <select value={sort} onChange={(e)=>setSort(e.target.value)}>
+             <option value="" >hye</option>
+             <option value='hye'>hye</option>
+             <option value={"bye"}>bye</option>
+             <option value={"hi"}>hi</option>
            </select>
          </div>
          <div>
