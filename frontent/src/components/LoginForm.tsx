@@ -38,17 +38,13 @@ const LoginForm = () => {
   const {doRequest:login,errors:errorLogin} = useRequest({
     url:userRoute.signIn,
     method:'post',
-    body:{
-       email,password
-    },
+    body:{},
     onSuccess:()=>navigate("/home")
 });
   const {doRequest:signUp,errors:errorSignUp} = useRequest({
     url:userRoute.signUp,
     method:'post',
-    body:{
-       email,name,password
-    },
+    body:{},
     onSuccess:()=>navigate("/home")
 });
   const {doRequest:googleAuth,errors:errorGoogle} = useRequest({
@@ -63,7 +59,7 @@ const LoginForm = () => {
   const handleSubmit = async(e: FormEvent) => {
       e.preventDefault();
       if(page=="signUp"){
-        const response = await signUp()
+        const response = await signUp({name,email,password})
         if(response.success){
              dispatch(setUser(response.user))
              
