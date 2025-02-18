@@ -1,3 +1,4 @@
+import BrickLoader from "@/components/BrickLoader";
 import Header from "@/components/Header";
 import { IRecipe } from "@/lib/types";
 import axios from "axios";
@@ -28,10 +29,19 @@ const RecipeDetailes = () => {
     };
     fetching();
   }, [id]);
-  console.log(recipe);
+  
   let str =
     'You can never have too many main course recipes, so give Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs a try. One serving contains <b>543 calories</b>, <b>17g of protein</b>, and <b>16g of fat</b>. For <b>$1.57 per serving</b>, this recipe <b>covers 22%</b> of your daily requirements of vitamins and minerals. This recipe serves 2. A mixture of butter, white wine, pasta, and a handful of other ingredients are all it takes to make this recipe so yummy. 209 people have tried and liked this recipe. It is brought to you by fullbellysisters.blogspot.com. From preparation to the plate, this recipe takes approximately <b>45 minutes</b>. Taking all factors into account, this recipe <b>earns a spoonacular score of 83%</b>, which is tremendous. If you like this recipe, take a look at these similar recipes: <a href="https://spoonacular.com/recipes/pasta-with-garlic-scallions-cauliflower-breadcrumbs-1230187">Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs</a>, <a href="https://spoonacular.com/recipes/pasta-with-garlic-scallions-cauliflower-breadcrumbs-1229807">Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs</a>, and <a href="https://spoonacular.com/recipes/pasta-with-garlic-scallions-cauliflower-breadcrumbs-1229669">Pasta with Garlic,Scallions, Cauliflower & Breadcrumbs</a>.';
-  return (
+   
+    if(!recipe){
+      return (
+        <>
+          <BrickLoader />
+        </>
+      );
+    }
+ 
+    return (
     <div className="bg-pink-50">
       <Header />
       <div className="container">
