@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 const AllRecipes = () => {
   const [count, setCount] = useState(1);
   const [pages] = useState(5229);
-  const [sort,setSort] = useState('');
+  const [sort,setSort] = useState('All');
   const [recipe, setRecipe] = useState<IRecipe[]>([]);
   useEffect(() => {
     const fetching = async () => {
@@ -26,8 +26,8 @@ const AllRecipes = () => {
       }/complexSearch?offset=${count * 9}&number=9&apiKey=${
         import.meta.env.VITE_SPOONACULAR_API_KEY
       }`;
-      if (sort) {
-        url += `&sort=${sort}&sortDirection=asc`; 
+      if (sort !== "All") {
+        url += `&${sort}`; 
       }
 
       const { data } = await axios.get(url);
@@ -51,18 +51,20 @@ const AllRecipes = () => {
       </div>
       <div className="flex">
          {/* <div> */}
-         <Select>
+         <Select  onValueChange={(value) => {
+            setSort(value);
+          }} defaultValue={sort}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select a fruit" />
       </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
-          <SelectItem value="apple">Apple</SelectItem>
-          <SelectItem value="banana">Banana</SelectItem>
-          <SelectItem value="blueberry">Blueberry</SelectItem>
-          <SelectItem value="grapes">Grapes</SelectItem>
-          <SelectItem value="pineapple">Pineapple</SelectItem>
+      <SelectContent >
+        <SelectGroup >
+          <SelectLabel>Sort</SelectLabel>
+          <SelectItem value="All">All</SelectItem>
+          <SelectItem value="sort=price&sortDirection=desc">Price High</SelectItem>
+          <SelectItem value="sort=price&sortDirection=asc">Price Low</SelectItem>
+          <SelectItem value="sort=readyInMinutes&sortDirection=asc">Coking Time Fast</SelectItem>
+          {/* <SelectItem value="grapes">Popularity High</SelectItem> */}
         </SelectGroup>
       </SelectContent>
     </Select>
