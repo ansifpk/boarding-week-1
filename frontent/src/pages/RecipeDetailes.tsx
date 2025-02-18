@@ -13,18 +13,18 @@ const RecipeDetailes = () => {
   const id = recipeId.get("recipeId");
   useEffect(() => {
     const fetching = async () => {
-      const { data } = await axios.get(
-        `${
-          import.meta.env.VITE_SPOONACULAR_API
-        }/${id}/information?includeNutrition=true&apiKey=${
-          import.meta.env.VITE_SPOONACULAR_API_KEY
-        }`
-      );
-      const res = await axios.get(
-        `${import.meta.env.VITE_SPOONACULAR_API}/${715538}/card?apiKey=${
-          import.meta.env.VITE_SPOONACULAR_API_KEY
-        }`
-      );
+      // const { data } = await axios.get(
+      //   `${
+      //     import.meta.env.VITE_SPOONACULAR_API
+      //   }/${id}/information?includeNutrition=true&apiKey=${
+      //     import.meta.env.VITE_SPOONACULAR_API_KEY
+      //   }`
+      // );
+      // const res = await axios.get(
+      //   `${import.meta.env.VITE_SPOONACULAR_API}/${715538}/card?apiKey=${
+      //     import.meta.env.VITE_SPOONACULAR_API_KEY
+      //   }`
+      // );
       const similerRecipes = await axios.get(
         `${import.meta.env.VITE_SPOONACULAR_API}/${id}/similar?apiKey=${
           import.meta.env.VITE_SPOONACULAR_API_KEY
