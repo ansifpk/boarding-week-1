@@ -26,6 +26,7 @@ export interface IRecipe{
     sourceName:string,
     readyInMinutes:number,
     cookingMinutes:number,
+    preparationMinutes:number,
     spoonacularScore:number,
     aggregateLikes:number,
     extendedIngredients:{

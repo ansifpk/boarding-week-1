@@ -83,6 +83,13 @@ const RecipeDetailes = () => {
                   Scoop these big flavors into a bowl, get your toppings
                   together and let’s gooooo!
                 </div>
+                <div >
+                   <ul>
+                      <li>{recipe?.preparationMinutes}</li>
+                      <li>{recipe?.cookingMinutes}</li>
+                      <li>{recipe?.readyInMinutes}</li>
+                   </ul>
+                </div>
                 <div className="mt-4">
                   <span className="text-3xl">EQUIPMENTS WE NEEDED</span>
                   <img
