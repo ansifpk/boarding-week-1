@@ -9,6 +9,7 @@ import {
   PaginationLink,
   PaginationNext,
 } from "@/components/ui/pagination";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { IRecipe } from "@/lib/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -49,14 +50,23 @@ const AllRecipes = () => {
         ALL RECIPES
       </div>
       <div className="flex">
-         <div>
-           <select value={sort} onChange={(e)=>setSort(e.target.value)}>
-             <option value="" >hye</option>
-             <option value='hye'>hye</option>
-             <option value={"bye"}>bye</option>
-             <option value={"hi"}>hi</option>
-           </select>
-         </div>
+         {/* <div> */}
+         <Select>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select a fruit" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Fruits</SelectLabel>
+          <SelectItem value="apple">Apple</SelectItem>
+          <SelectItem value="banana">Banana</SelectItem>
+          <SelectItem value="blueberry">Blueberry</SelectItem>
+          <SelectItem value="grapes">Grapes</SelectItem>
+          <SelectItem value="pineapple">Pineapple</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+         {/* </div> */}
          <div className="w-full">
         {/* body part start */}
         <Cards arr={recipe} />
