@@ -56,7 +56,7 @@ const AllRecipes = () => {
         ALL RECIPES
       </div>
       <div className="flex">
-        <div className="border">
+        <div className="border w-[250px]">
         <Select
           onValueChange={(value) => {
             setSort(value);
