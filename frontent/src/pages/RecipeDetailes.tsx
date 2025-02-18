@@ -33,8 +33,8 @@ const RecipeDetailes = () => {
  console.log('similerRecipes',similerRecipes);
  
       // setSimiler(similerRecipes);
-      setRecipe(data);
-      setImag(res.data.url);
+      // setRecipe(data);
+      // setImag(res.data.url);
     };
     fetching();
   }, [id]);
