@@ -21,7 +21,7 @@ const RecipeDetailes = () => {
         }`
       );
       const res = await axios.get(
-        `${import.meta.env.VITE_SPOONACULAR_API}/${id}/card?apiKey=${
+        `${import.meta.env.VITE_SPOONACULAR_API}/${715538}/card?apiKey=${
           import.meta.env.VITE_SPOONACULAR_API_KEY
         }`
       );
