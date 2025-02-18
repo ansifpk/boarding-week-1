@@ -21,7 +21,7 @@ const Home = () => {
    
     
   },[]) 
-  // console.log(categories);
+
   return (
     <div className='bg-pink-50'>
        <Header/>
@@ -31,11 +31,11 @@ const Home = () => {
         {/* welcome recipe start */}
        <div className='flex justify-center gap-5 m-4'>
         <div className='flex flex-col h-[400px] w-25 items-center'>
-          {/* <img src={`https://img.spoonacular.com/recipes/639333-636x393.jpg`} alt={"recipe.title"} className='w-full h-full object-cover' /> */}
+          <img src={`https://img.spoonacular.com/recipes/639333-636x393.jpg`} alt={"recipe.title"} className='w-full h-full object-cover' />
           <span className='font-bold bg-amber-300 p-2'>VEGETARIAN</span>
         </div>
         <div className='flex flex-col h-[400px] w-25 items-center'>
-          {/* <img src={`https://img.spoonacular.com/recipes/982376-636x393.jpg`} alt={"recipe.title"} className='w-full h-full object-cover' /> */}
+          <img src={`https://img.spoonacular.com/recipes/982376-636x393.jpg`} alt={"recipe.title"} className='w-full h-full object-cover' />
           <span className='font-bold bg-amber-300 p-2'>NON-VEGETARIAN</span>
         </div>
        </div>
