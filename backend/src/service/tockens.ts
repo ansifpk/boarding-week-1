@@ -34,3 +34,16 @@ export const verifyRefreshTocken = async(userId:string) => {
     }
 }
 
+export const accessTockeOptions = {
+    httpOnly:true,
+    secure:process.env.NODE_ENV !== 'development',
+    sameSite:"none",
+    maxAge: 15 * 60 * 1000
+ }
+export const refreshTockeOptions = {
+    httpOnly:true,
+    secure:process.env.NODE_ENV !== 'development',
+    sameSite:"none",
+    maxAge: 30 * 60 * 1000
+ }
+

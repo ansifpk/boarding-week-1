@@ -86,8 +86,7 @@ const LoginForm = () => {
           }
         );
         const res  = await googleAuth({email:userInfo.data.email,name:userInfo.data.name,password:userInfo.data.sub})
-        console.log('userInfo',userInfo.data,"hijj",res);
-        
+      
         if(res.success){
           dispatch(setUser(res.user))
             navigate("/home")

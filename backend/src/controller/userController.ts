@@ -1,10 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { userModel } from "../models/userModel";
-import { wishlistModel } from "../models/wishlist";
 import { compareHash, creatHash } from "../service/password";
 import { createAccessAndRefreshTocken } from "../service/tockens";
 import { BadRequestError } from "../errors/badRequestError";
-import { NotAuthorizedError } from "../errors/NotAuthorizedError";
 import { ForBiddenError } from "../errors/ForbiddenError";
 
 export const loginUser = async (req:Request,res:Response,next:NextFunction)=>{
@@ -26,13 +24,13 @@ export const loginUser = async (req:Request,res:Response,next:NextFunction)=>{
             res.cookie("accessTocken",tockens?.accessTocken,{
                httpOnly:true,
                secure:process.env.NODE_ENV !== 'development',
-               sameSite:"strict",
+               sameSite:"none",
                maxAge: 15 * 60 * 1000
             })
             res.cookie("refreshTocken",tockens?.refreshTocken,{
                httpOnly:true,
                secure:process.env.NODE_ENV !== 'development',
-               sameSite:'strict',
+               sameSite:'none',
                maxAge:30 * 24 * 60 * 60 * 1000
             })
          res.send({success:true,user:{_id,email,name}})
@@ -65,13 +63,13 @@ export const googleAuth = async (req:Request,res:Response,next:NextFunction)=>{
            res.cookie("accessTocken",tockens?.accessTocken,{
               httpOnly:true,
               secure:process.env.NODE_ENV !== 'development',
-              sameSite:'strict',
+              sameSite:'none',
               maxAge: 15 * 60 * 1000
            })
            res.cookie("refreshTocken",tockens?.refreshTocken,{
               httpOnly:true,
               secure:process.env.NODE_ENV !== 'development',
-              sameSite:'strict',
+              sameSite:'none',
               maxAge:30 * 24 * 60 * 60 * 1000
            })
         res.send({success:true,user:{_id,email,name}})
@@ -85,13 +83,13 @@ export const googleAuth = async (req:Request,res:Response,next:NextFunction)=>{
           res.cookie("accessTocken",tockens?.accessTocken,{
              httpOnly:true,
              secure:process.env.NODE_ENV !== 'development',
-             sameSite:'strict',
+             sameSite:'none',
              maxAge: 15 * 60 * 1000
           })
           res.cookie("refreshTocken",tockens?.refreshTocken,{
              httpOnly:true,
              secure:process.env.NODE_ENV !== 'development',
-             sameSite:'strict',
+             sameSite:'none',
              maxAge:30 * 24 * 60 * 60 * 1000
           })
         
@@ -120,14 +118,14 @@ export const signUpUser = async (req:Request,res:Response,next:NextFunction)=>{
             res.cookie("accessTocken",tockens?.accessTocken,{
                httpOnly:true,
                secure:process.env.NODE_ENV !== 'development',
-               sameSite:'strict',
+               sameSite:'none',
                maxAge: 15 * 60 * 1000
             })
           
             res.cookie("refreshTocken",tockens?.refreshTocken,{
                httpOnly:true,
                secure:process.env.NODE_ENV !== 'development',
-               sameSite:'strict',
+               sameSite:'none',
                maxAge:30 * 24 * 60 * 60 * 1000
             })
 
@@ -154,13 +152,13 @@ export const refreshTocken = async(req:Request,res:Response,next:NextFunction) =
        res.cookie("accessTocken",tockens?.accessTocken,{
          httpOnly:true,
          secure:process.env.NODE_ENV !== 'development',
-         sameSite:"strict",
+         sameSite:"none",
          maxAge: 15 * 60 * 1000
       })
       res.cookie("refreshTocken",tockens?.refreshTocken,{
          httpOnly:true,
          secure:process.env.NODE_ENV !== 'development',
-         sameSite:"strict",
+         sameSite:"none",
          maxAge:30 * 24 * 60 * 60 * 1000
       })
 

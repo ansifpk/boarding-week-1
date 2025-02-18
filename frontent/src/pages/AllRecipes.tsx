@@ -16,14 +16,20 @@ import { useEffect, useState } from "react";
 const AllRecipes = () => {
   const [count, setCount] = useState(1);
   const [pages] = useState(5229);
+  const [sort] = useState('');
   const [recipe, setRecipe] = useState<IRecipe[]>([]);
   useEffect(() => {
     const fetching = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_SPOONACULAR_API}/complexSearch?offset=${
-          count * 9
-        }&number=${9}&apiKey=${import.meta.env.VITE_SPOONACULAR_API_KEY}`
-      );
+      let url = `${
+        import.meta.env.VITE_SPOONACULAR_API
+      }/complexSearch?offset=${count * 9}&number=9&apiKey=${
+        import.meta.env.VITE_SPOONACULAR_API_KEY
+      }`;
+      if (sort) {
+        url += `&sort=${sort}&sortDirection=asc`; 
+      }
+
+      const { data } = await axios.get(url);
       setRecipe(data.results);
     };
     fetching()
@@ -42,7 +48,11 @@ const AllRecipes = () => {
       <div className="text-center font-bold text-2xl text-yellow-400 my-4 underline">
         ALL RECIPES
       </div>
-      <div>
+      <div className="flex">
+         <div>
+           hi
+         </div>
+         <div>
         {/* body part start */}
         <Cards arr={recipe} />
         {/* body part end  */}
@@ -75,6 +85,7 @@ const AllRecipes = () => {
         </Pagination>
 
         {/* pagination end */}
+      </div>
       </div>
     </div>
   );
