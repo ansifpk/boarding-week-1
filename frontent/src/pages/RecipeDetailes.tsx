@@ -94,7 +94,7 @@ const RecipeDetailes = () => {
                   together and let’s gooooo!
                 </div>
                 <div >
-                   <ul className="flex gap-5 list-disc">
+                   <ul className="flex gap-10 list-disc">
                       <li>Preparation Minutes : {recipe?.preparationMinutes}</li>
                       <li>Cooking Minutes : {recipe?.cookingMinutes}</li>
                       <li>ReadyIn Minutes : {recipe?.readyInMinutes}</li>
