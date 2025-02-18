@@ -56,7 +56,7 @@ const AllRecipes = () => {
         ALL RECIPES
       </div>
       <div className="flex">
-        {/* <div> */}
+        <div className="border">
         <Select
           onValueChange={(value) => {
             setSort(value);
@@ -67,7 +67,7 @@ const AllRecipes = () => {
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select a fruit" />
           </SelectTrigger>
-          <SelectContent className="border">
+          <SelectContent >
             <SelectGroup>
               <SelectLabel>Sort</SelectLabel>
               <SelectItem value="All">All</SelectItem>
@@ -84,7 +84,7 @@ const AllRecipes = () => {
             </SelectGroup>
           </SelectContent>
         </Select>
-        {/* </div> */}
+        </div>
         <div className="w-full">
           {/* body part start */}
           <Cards arr={recipe} />
