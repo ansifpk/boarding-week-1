@@ -40,7 +40,7 @@ const AllRecipes = () => {
       setRecipe(data.results);
     };
     fetching();
-  }, [count]);
+  }, [count,sort]);
 
   if (!recipe.length) {
     return (
@@ -56,7 +56,7 @@ const AllRecipes = () => {
         ALL RECIPES
       </div>
       <div className="flex">
-        <div className="border w-[250px]">
+        <div className="w-[250px]">
         <Select
           onValueChange={(value) => {
             setSort(value);
@@ -64,7 +64,7 @@ const AllRecipes = () => {
           defaultValue={sort}
           
         >
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-[180px] mx-auto">
             <SelectValue placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent >
