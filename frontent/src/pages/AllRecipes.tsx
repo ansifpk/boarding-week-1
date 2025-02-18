@@ -57,7 +57,7 @@ const AllRecipes = () => {
              <option value={"hi"}>hi</option>
            </select>
          </div>
-         <div>
+         <div className="w-full">
         {/* body part start */}
         <Cards arr={recipe} />
         {/* body part end  */}
