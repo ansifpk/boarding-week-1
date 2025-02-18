@@ -80,7 +80,7 @@ const AllRecipes = () => {
               <SelectItem value="sort=readyInMinutes&sortDirection=asc">
                 Coking Time Fast
               </SelectItem>
-              {/* <SelectItem value="grapes">Popularity High</SelectItem> */}
+            
             </SelectGroup>
           </SelectContent>
         </Select>
