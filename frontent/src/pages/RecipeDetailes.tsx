@@ -94,10 +94,10 @@ const RecipeDetailes = () => {
                   together and let’s gooooo!
                 </div>
                 <div >
-                   <ul>
-                      <li>{recipe?.preparationMinutes}</li>
-                      <li>{recipe?.cookingMinutes}</li>
-                      <li>{recipe?.readyInMinutes}</li>
+                   <ul className="flex gap-2 list-disc">
+                      <li>Preparation Minutes : {recipe?.preparationMinutes}</li>
+                      <li>Cooking Minutes : {recipe?.cookingMinutes}</li>
+                      <li>ReadyIn Minutes : {recipe?.readyInMinutes}</li>
                    </ul>
                 </div>
                 <div className="mt-4">
