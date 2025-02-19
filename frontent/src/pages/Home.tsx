@@ -1,3 +1,4 @@
+import BrickLoader from '@/components/BrickLoader'
 import Buttons from '@/components/Buttons'
 import Cards from '@/components/Cards'
 import Footer from '@/components/Footer'
@@ -21,7 +22,13 @@ const Home = () => {
    
     
   },[]) 
-
+  if(!categories.length){
+    return (
+      <>
+        <BrickLoader />
+      </>
+    );
+  }
   return (
     <div className='bg-pink-50'>
        <Header/>
@@ -35,7 +42,7 @@ const Home = () => {
         {/* 10 Categories start*/}
      
        <div className='bg-white text-center font-bold border-t py-3'>
-       <span>You May Lie This</span>
+       <span>You May Like This</span>
        </div>
      
      
