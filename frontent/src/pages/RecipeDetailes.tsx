@@ -7,7 +7,7 @@ import { useSearchParams } from "react-router-dom";
 
 const RecipeDetailes = () => {
   const [recipe, setRecipe] = useState<IRecipe>();
-  const [similer, setSimiler] = useState<IRecipe>();
+  // const [similer, setSimiler] = useState<IRecipe>();
   const [image, setImag] = useState<string>("");
   const [recipeId] = useSearchParams();
   const id = recipeId.get("recipeId");
