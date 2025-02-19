@@ -1,4 +1,5 @@
 import Buttons from '@/components/Buttons'
+import Cards from '@/components/Cards'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { ICuisine } from '@/lib/types'
@@ -42,17 +43,17 @@ const Home = () => {
         {/* welcome recipe end */}
 
         {/* 10 Categories start*/}
-      <div className='flex gap-12 items-center justify-center'>
+      {/* <div className='flex gap-12 items-center justify-center'>
         {categories.map((cate,index)=>(
           <li key={index} className=' w-[100px]   list-none items-center justify-center'>
              <div className='flex  h-[100px] w-[100px]  items-center'>
                <img src={`https://img.spoonacular.com/recipes/982376-636x393.jpg`} className='w-full h-full object-cover rounded-full' alt="" />
-               {/* <img src={cate.image} className='w-full h-full object-cover rounded-full' alt="" /> */}
                </div>
                 <span className='font-semibold text-sm'>{cate.title}</span>
           </li>
         ))}
-      </div>
+      </div> */}
+      <Cards arr={categories} />
        {/* 10 Categories end*/}
 
        {/* view full recipe start*/}
