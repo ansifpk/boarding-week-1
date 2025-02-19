@@ -30,7 +30,7 @@ const Home = () => {
         <span >Simple And Tasty Recipes </span>
        </div>
         {/* welcome recipe start */}
-       <div className='flex justify-center gap-5 m-4'>
+       {/* <div className='flex justify-center gap-5 m-4'>
         <div className='flex flex-col h-[400px] w-25 items-center'>
           <img src={`https://img.spoonacular.com/recipes/639333-636x393.jpg`} alt={"recipe.title"} className='w-full h-full object-cover' />
           <span className='font-bold bg-amber-300 p-2'>VEGETARIAN</span>
@@ -39,7 +39,7 @@ const Home = () => {
           <img src={`https://img.spoonacular.com/recipes/982376-636x393.jpg`} alt={"recipe.title"} className='w-full h-full object-cover' />
           <span className='font-bold bg-amber-300 p-2'>NON-VEGETARIAN</span>
         </div>
-       </div>
+       </div> */}
         {/* welcome recipe end */}
 
         {/* 10 Categories start*/}
