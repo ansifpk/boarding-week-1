@@ -18,6 +18,13 @@ export interface IWishlist{
     createdAt:string
     
 }
+export interface ISimiler{
+    
+    id:string,
+    title:string,
+    sourceUrl:string
+    
+}
 export interface IRecipe{
     id:number,
     title:string,

@@ -53,6 +53,11 @@ const Home = () => {
           </li>
         ))}
       </div> */}
+       <div className='bg-white text-center font-bold border-t py-3'>
+       <span>You May Lie This</span>
+       </div>
+     
+     
       <Cards arr={categories} />
        {/* 10 Categories end*/}
 
