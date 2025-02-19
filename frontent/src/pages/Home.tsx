@@ -8,8 +8,7 @@ import  { useEffect, useState } from 'react'
 
 
 const Home = () => {
-  // const [homePageRecipes,setHomePageRecipes] = useState([])
- 
+  
   const [categories,setCategories] = useState<ICuisine[]>([])
  
   
@@ -30,29 +29,11 @@ const Home = () => {
         <span >Simple And Tasty Recipes </span>
        </div>
         {/* welcome recipe start */}
-       {/* <div className='flex justify-center gap-5 m-4'>
-        <div className='flex flex-col h-[400px] w-25 items-center'>
-          <img src={`https://img.spoonacular.com/recipes/639333-636x393.jpg`} alt={"recipe.title"} className='w-full h-full object-cover' />
-          <span className='font-bold bg-amber-300 p-2'>VEGETARIAN</span>
-        </div>
-        <div className='flex flex-col h-[400px] w-25 items-center'>
-          <img src={`https://img.spoonacular.com/recipes/982376-636x393.jpg`} alt={"recipe.title"} className='w-full h-full object-cover' />
-          <span className='font-bold bg-amber-300 p-2'>NON-VEGETARIAN</span>
-        </div>
-       </div> */}
+      
         {/* welcome recipe end */}
 
         {/* 10 Categories start*/}
-      {/* <div className='flex gap-12 items-center justify-center'>
-        {categories.map((cate,index)=>(
-          <li key={index} className=' w-[100px]   list-none items-center justify-center'>
-             <div className='flex  h-[100px] w-[100px]  items-center'>
-               <img src={`https://img.spoonacular.com/recipes/982376-636x393.jpg`} className='w-full h-full object-cover rounded-full' alt="" />
-               </div>
-                <span className='font-semibold text-sm'>{cate.title}</span>
-          </li>
-        ))}
-      </div> */}
+     
        <div className='bg-white text-center font-bold border-t py-3'>
        <span>You May Lie This</span>
        </div>

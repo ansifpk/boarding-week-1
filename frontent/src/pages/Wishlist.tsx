@@ -38,7 +38,7 @@ const Wishlist = () => {
      
       const data = await doRequest()
       if(data.wishlist){
-        console.log('wishlist',data.wishlist)
+        
         setWishlist(data.wishlist)
       }
     }
@@ -54,7 +54,7 @@ const Wishlist = () => {
     };
   }, [search]);
   useEffect(() => {
-    console.log("debouns", debouns);
+   
     const fetching = async () => {
       if (debouns.length == 0) {
        const {data} = await axios.get(`${import.meta.env.VITE_SPOONACULAR_API}/complexSearch?number=100&apiKey=${import.meta.env.VITE_SPOONACULAR_API_KEY}`)

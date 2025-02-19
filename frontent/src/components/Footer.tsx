@@ -2,7 +2,7 @@
 const Footer = () => {
   return (
     <div className='flex flex-col bg-pink-300 h-52 justify-center items-center text-white w-full'>
-      {/* <span className='font-bold'> Recipe World</span> */}
+     
       <ul className='flex gap-5'>
         <li>Privacy Policy</li>
         <li>Terms</li>

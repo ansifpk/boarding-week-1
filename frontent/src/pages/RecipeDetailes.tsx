@@ -1,13 +1,13 @@
 import BrickLoader from "@/components/BrickLoader";
 import Header from "@/components/Header";
-import { IRecipe, ISimiler } from "@/lib/types";
+import { IRecipe, } from "@/lib/types";
 import axios from "axios";
 import  { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const RecipeDetailes = () => {
   const [recipe, setRecipe] = useState<IRecipe>();
-  // const [similer, setSimiler] = useState<ISimiler[]>([]);
+ 
   const [image, setImag] = useState<string>("");
   const [recipeId] = useSearchParams();
   const id = recipeId.get("recipeId");
@@ -25,14 +25,7 @@ const RecipeDetailes = () => {
           import.meta.env.VITE_SPOONACULAR_API_KEY
         }`
       );
-      // const similerRecipes = await axios.get(
-      //   `${import.meta.env.VITE_SPOONACULAR_API}/${id}/similar?apiKey=${
-      //     import.meta.env.VITE_SPOONACULAR_API_KEY
-      //   }`
-      // );
-//  console.log('similerRecipes',similerRecipes);
- 
-      // setSimiler(similerRecipes.data);
+      
       setRecipe(data);
       setImag(res.data.url);
     };
