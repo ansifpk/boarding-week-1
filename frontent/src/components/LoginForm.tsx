@@ -32,7 +32,7 @@ const LoginForm = () => {
   const [minutes,setMinute] = useState(1)
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch()
-  const [error] = useState({
+  const [error,setError] = useState({
     email:false,
     password:false,
     name:false,
@@ -75,10 +75,44 @@ const LoginForm = () => {
   const handleSubmit = async(e: FormEvent) => {
       e.preventDefault();
       if(page=="signUp"){
+        if(!/^[A-Za-z0-9.%+-]+@gmail\.com$/.test(email)){
+          return setError((pre)=>({
+            ...pre,
+            email:true
+          }))
+        }else{
+          setError((pre)=>({
+            ...pre,
+            email:false
+          }))
+        }
+        if(name.length == 0 ){
+          return setError((pre)=>({
+            ...pre,
+            name:true
+          }))
+        }else{
+          setError((pre)=>({
+            ...pre,
+            name:false
+          }))
+        }
+        if(password.length<8||password.length>20){
+          return setError((pre)=>({
+            ...pre,
+            password:true
+          }))
+        }else{
+          setError((pre)=>({
+            ...pre,
+            password:false
+          }))
+        }
+      
+        
         const response = await signUp({name,email,password})
         if(response.success){
              setPage("otp")
-            //  dispatch(setUser(response.user))
         }
       }else{
         const data =  await login({email,password});
@@ -116,12 +150,10 @@ const LoginForm = () => {
  //TODO google login and signUp end
   const handleOtp = async(e:FormEvent) =>{
     e.preventDefault();
-    console.log("otp");
     if(otp.length ==0){
       return toast.error("Invalid otp")
     }
     const res = await checkOtp({email,password,name,otp})
-    console.log(res);
     if(res.success){
       dispatch(setUser(res.user))
     }
@@ -230,7 +262,15 @@ const LoginForm = () => {
               <Label htmlFor="Email">Email</Label>
               <Input
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) =>{
+                  if(/^[A-Za-z0-9.%+-]+@gmail\.com$/.test(email)){
+                     setError((pre)=>({
+                      ...pre,
+                      email:false
+                    }))
+                  }
+                  setEmail(e.target.value)
+                }}
                 id="Email"
                 placeholder="Email"
               />
@@ -240,7 +280,15 @@ const LoginForm = () => {
               <Label htmlFor="Name">Name</Label>
               <Input
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  if(name.length>0){
+                    setError((prev)=>({
+                      ...prev,
+                      name:false
+                    }))
+                  }
+                  setName(e.target.value)
+                }}
                 id="Name"
                 placeholder="Name"
               />
@@ -251,7 +299,15 @@ const LoginForm = () => {
                 <Label htmlFor="Password">Password</Label>
               <Input
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) =>{
+                  if(password.length>=8&&password.length<=20){
+                    setError((prev)=>({
+                      ...prev,
+                      password:false
+                    }))
+                  }
+                   setPassword(e.target.value)
+                  }}
                 id="Password"
                 placeholder="Password"
                 type={showPassword ?"string":"password"}
