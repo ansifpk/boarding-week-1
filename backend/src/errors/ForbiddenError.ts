@@ -1,7 +1,8 @@
+import { StatusCode } from "../statusCodes/statusCode";
 import { CustomError } from "./customError"
 
 export class ForBiddenError extends CustomError{
-    statusCode = 403;
+    statusCode = StatusCode.FORBIDDEN_REQUEST;
     constructor(){
         super("Access Forbidden")
         Object.setPrototypeOf(this,ForBiddenError.prototype)

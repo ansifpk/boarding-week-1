@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 interface ChildProps {
-  arr: ICuisine[] | null;
+  arr: ICuisine[] ;
 }
 
 const Cards: React.FC<ChildProps> = ({ arr }) => {
@@ -26,6 +26,7 @@ const Cards: React.FC<ChildProps> = ({ arr }) => {
         setWishlist(data);
        }
        fetching()
+        // console.log("kiu");
         
     }
    },[favorites])
@@ -66,21 +67,29 @@ const Cards: React.FC<ChildProps> = ({ arr }) => {
       setFavorites(response.wishlist);
     }
   };
+// console.log(favorites,"favorites",arr);
 
-  if (arr?.length == 0 && favorites !== null) {
+  if (arr.length == 0 && favorites == null) {
     return (
-      <div className="flex  h-full w-full">
-        <span className="mx-auto mt-52 font-bold text-1xl">
-          No Favorite items
+      <div className="flex   justify-center h-full w-full">
+        <div className="mt-52 ">
+        <span className="text-black font-bold text-1xl">
+          No Favorite items&nbsp;&nbsp;&nbsp;
+        </span> 
+        <span onClick={()=>navigate('/allRecipes')} className="text-black cursor-pointer underline font-bold text-1xl">
+          Go to Recipes
         </span>
+        </div>
+        
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-3 w-75 mx-auto mt-4">
+    <div className="grid grid-cols-3 w-75  mt-4 mx-auto">
       {location.pathname == "/wishlist" ? (
         <>
+         
           {wishlist?.map((val,index)=>(
               <div key={index} className="w-[250px]">
               <div
@@ -95,11 +104,6 @@ const Cards: React.FC<ChildProps> = ({ arr }) => {
               </div>
               <div className="flex flex-col items-center">
                 <div className="flex justify-between w-full">
-                  {/* {val.aggregateLikes && (
-                    <i className="bi bi-hand-thumbs-up-fill text-primary">
-                      {val.aggregateLikes}
-                    </i>
-                  )} */}
                   <i
                     onClick={() => handleWishlist(val.id)}
                     className={`${
@@ -114,7 +118,6 @@ const Cards: React.FC<ChildProps> = ({ arr }) => {
                   className="text-center "
                   onClick={() => navigate(`/detailes?recipeId=${val.id}`)}
                 >
-                  {/* <span className='text-sm font-medium' >4 reviews/4.9 Avarage</span> */}
                   <div className="font-bold">{val.title}</div>
                 </div>
               </div>
@@ -124,10 +127,10 @@ const Cards: React.FC<ChildProps> = ({ arr }) => {
       ) : (
         //  for recipe page start
         arr?.map((val: ICuisine, index) => (
-          <div key={index} className="w-[250px]">
+          <div key={index} className="md:w-[250px] sm:w-[150px]">
             <div
               onClick={() => navigate(`/detailes?recipeId=${val.id}`)}
-              className="w-[250px] h-[250px]"
+              className="md:w-[250px] md:h-[250px] sm:w-[150px] "
             >
               <img
                 src={val.image}
@@ -157,7 +160,7 @@ const Cards: React.FC<ChildProps> = ({ arr }) => {
                 onClick={() => navigate(`/detailes?recipeId=${val.id}`)}
               >
                 {/* <span className='text-sm font-medium' >4 reviews/4.9 Avarage</span> */}
-                <div className="font-bold">{val.title}</div>
+                <div className="font-bold text-xs">{val.title}</div>
               </div>
             </div>
           </div>

@@ -55,8 +55,8 @@ const AllRecipes = () => {
       <div className="text-center font-bold text-2xl text-yellow-400 my-4 underline">
         ALL RECIPES
       </div>
-      <div className="flex">
-        <div className="w-[250px]">
+      <div className="flex gap-3">
+        <div className="md:w-[250px] w-[100px] mt-4">
         <Select
           onValueChange={(value) => {
             setSort(value);
@@ -64,7 +64,7 @@ const AllRecipes = () => {
           defaultValue={sort}
           
         >
-          <SelectTrigger className="w-[180px] mx-auto">
+          <SelectTrigger className="md:w-[180px] w-[150px] mx-auto">
             <SelectValue placeholder="Select a fruit" />
           </SelectTrigger>
           <SelectContent >

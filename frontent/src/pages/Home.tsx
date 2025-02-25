@@ -50,7 +50,7 @@ const Home = () => {
        {/* 10 Categories end*/}
 
        {/* view full recipe start*/}
-       <Buttons/>
+       <Buttons text={'View All Recipes'}/>
        {/* view full recipe end*/}
         <Footer/>
     </div>

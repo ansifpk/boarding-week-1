@@ -1,0 +1,6 @@
+export enum StatusCode{
+    BAD_REQUEST = 400,
+    FORBIDDEN_REQUEST = 403,
+    NOT_AUTHORIZED_REQUEST = 401,
+    NOT_FOUND_REQUEST = 404,
+}

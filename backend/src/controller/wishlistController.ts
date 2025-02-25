@@ -7,6 +7,7 @@ export const getWishlist = async (req:Request,res:Response,next:NextFunction)=>{
        const {userId} = req.params
      
        const wishlist = await wishlistModel.findOne({userId:userId});
+      
        res.send({wishlist})
     } catch (error) {
      console.error(error)

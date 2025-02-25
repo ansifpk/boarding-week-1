@@ -25,7 +25,11 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [otp, setOtp] = useState("");
+  // const [page, setPage] = useState("otp");
   const [page, setPage] = useState("signIn");
+  const [second,setSecond] = useState(59)
+  const [minutes,setMinute] = useState(1)
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch()
   const [error] = useState({
@@ -45,14 +49,26 @@ const LoginForm = () => {
     url:userRoute.signUp,
     method:'post',
     body:{},
-    onSuccess:()=>navigate("/home")
+    onSuccess:()=>{}
 });
   const {doRequest:googleAuth,errors:errorGoogle} = useRequest({
     url:userRoute.googleAuth,
     method:'post',
     body:{},
     onSuccess:()=>navigate("/home")
-});
+  });
+  const {doRequest:checkOtp,errors:otpError} = useRequest({
+    url:userRoute.otp,
+    method:'post',
+    body:{},
+    onSuccess:()=>navigate("/home")
+  });
+  const {doRequest:resentOtp,errors:resentOtpError} = useRequest({
+    url:userRoute.resentOtp,
+    method:'post',
+    body:{},
+    onSuccess:()=>{}
+  });
   
  //TODO login and signUp
 
@@ -61,14 +77,13 @@ const LoginForm = () => {
       if(page=="signUp"){
         const response = await signUp({name,email,password})
         if(response.success){
-             dispatch(setUser(response.user))
-             
+             setPage("otp")
+            //  dispatch(setUser(response.user))
         }
       }else{
         const data =  await login({email,password});
         if(data.success){
           dispatch(setUser(data.user))
-          
         }
       }
   };
@@ -99,15 +114,93 @@ const LoginForm = () => {
   });
 
  //TODO google login and signUp end
-
+  const handleOtp = async(e:FormEvent) =>{
+    e.preventDefault();
+    console.log("otp");
+    if(otp.length ==0){
+      return toast.error("Invalid otp")
+    }
+    const res = await checkOtp({email,password,name,otp})
+    console.log(res);
+    if(res.success){
+      dispatch(setUser(res.user))
+    }
+    
+  }
   //! errors start
   useEffect(()=>{
     errorLogin?.length!>0&&errorLogin!.map((err)=>toast.error(err.message))
     errorSignUp?.length!>0&&errorSignUp!.map((err)=>toast.error(err.message))
     errorGoogle?.length!>0&&errorGoogle!.map((err)=>toast.error(err.message))
-  },[errorLogin,errorSignUp,errorGoogle])
+    otpError?.length!>0&&otpError!.map((err)=>toast.error(err.message))
+    resentOtpError?.length!>0&&resentOtpError!.map((err)=>toast.error(err.message))
+  },[errorLogin,errorSignUp,errorGoogle,otpError,resentOtpError])
   //! errors end
 
+  useEffect(()=>{
+    const intervel = setInterval(() => {
+       if(second > 0){
+        setSecond(second-1);
+       }
+       if(second === 0){
+        if(minutes === 0){
+           clearInterval(intervel)
+        }else{
+          setSecond(59)
+          setMinute(minutes-1)
+        }
+       }
+    }, 1000);
+    return () => {
+      clearInterval(intervel);
+    }
+  },[second])
+
+  const resentOTP = async() => {
+    const response:any = await resentOtp({email})
+    if(response.success){
+      return  toast.success("Resnt OTP Sent to Your Mail")
+    }
+  }
+  if(page == "otp"){
+    return (
+      <div >
+         <Card className="w-[350px]">
+         <CardHeader className="flex items-center">
+          <CardTitle>Enter your Otp</CardTitle>
+          <CardDescription>We sent you an 6 digit otp to your mail.</CardDescription>
+        </CardHeader>
+          <form onSubmit={handleOtp}>
+            <CardContent>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="OTP">OTP</Label>
+              <Input
+                value={otp}
+                type="number"
+                onChange={(e) => setOtp(e.target.value)}
+                id="OTP"
+                placeholder="OTP"
+              />
+            </div>
+            <div className="flex items-center justify-between">
+             <p>
+              Time Remaining:{" "}
+              <span style={{color:"black", fontWeight:600}}>
+                {minutes!<10?`0${minutes}`:minutes}:
+                {second!<10?`0${second}`:second}
+              </span>
+             </p>
+             <button 
+             disabled={second>0||minutes>0}
+             style={{color:second>0||minutes>0?"#DFE3E8":"#FF5630"}}
+              type="button" onClick={resentOTP} className='submit-btn' >Resend Otp</button>
+           </div>
+            </CardContent>
+          </form>
+         </Card>
+      </div>
+    )
+  }
   return (
    <div >
      <Card className="w-[350px]">
@@ -115,6 +208,7 @@ const LoginForm = () => {
         <CardTitle>Welcom Back</CardTitle>
         <CardDescription>{page=="signIn"?'Sign In':'Sign Up'} with your google.</CardDescription>
       </CardHeader>
+      
       <form onSubmit={handleSubmit}>
         <CardContent>
           <Button

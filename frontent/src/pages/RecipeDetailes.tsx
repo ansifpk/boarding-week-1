@@ -47,7 +47,7 @@ const RecipeDetailes = () => {
     <div className="bg-pink-50">
       <Header />
       <div className="container">
-        <div className="flex gap-5 mt-5">
+        <div className="flex md:gap-5 gap-1 mt-5">
           <div className="w-75 ">
             <div className="font-semibold text-4xl font-serif">
               The Best Soft Chocolate Chip Cookies
@@ -67,7 +67,7 @@ const RecipeDetailes = () => {
                   .replace(/>/g, "")}
               </span>
               <div>
-                <span className="font-bold text-4xl">INGREDIENTS NEEDED</span>
+                <span className="font-bold md:text-4xl ">INGREDIENTS NEEDED</span>
                 <li>
                   We have a really simple and delicious ingredient list for you.
                 </li>
@@ -77,7 +77,7 @@ const RecipeDetailes = () => {
                   ))}
                 </ul>
                 <div className="">
-                  <span className="font-semibold text-2xl">
+                  <span className="font-semibold md:text-2xl">
                     HOW TO MAKE {recipe?.title}
                   </span>
                   <p>Let's cook</p>
@@ -103,7 +103,7 @@ const RecipeDetailes = () => {
                    </ul>
                 </div>
                 <div className="mt-4">
-                  <span className="text-3xl">EQUIPMENTS WE NEEDED</span>
+                  <span className="md:text-3xl font-semibold">EQUIPMENTS WE NEEDED</span>
                   <img
                     src={`${
                       import.meta.env.VITE_SPOONACULAR_API
@@ -114,7 +114,7 @@ const RecipeDetailes = () => {
                   />
                 </div>
                 <div className="mt-4">
-                  <span className="text-3xl">INGREEDIENCE WE NEEDED</span>
+                  <span className="md:text-3xl font-semibold">INGREEDIENCE WE NEEDED</span>
                   <img
                     src={`${
                       import.meta.env.VITE_SPOONACULAR_API
@@ -138,7 +138,7 @@ const RecipeDetailes = () => {
               </div>
             </div>
           </div>
-          <div className="w-25 h-[350px]">
+          <div className="md:w-75 w-full md:h-[350px] h-[250px]">
             <img
               src={image}
               alt={"recipe.title"}

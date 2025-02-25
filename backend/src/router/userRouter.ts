@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express"
-import { googleAuth, loginUser, refreshTocken, signOutUser, signUpUser} from '../controller/userController'
+import { checkOtp, googleAuth, loginUser, refreshTocken, resentOtp, signOutUser, signUpUser} from '../controller/userController'
 import { body } from "express-validator"
 import { ValidateRequest } from "../middlewares/validateRequest";
 import { isAuth } from "../middlewares/auth";
@@ -39,6 +39,8 @@ router.post('/googleAuth',googleAuth)
 )
 
 .post('/refresh-token/:userId',refreshTocken)
+.post('/otp',checkOtp)
+.post('/resentOtp',resentOtp)
 
 .post('/signOut',
     signOutUser

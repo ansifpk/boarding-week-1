@@ -52,7 +52,7 @@ const Recipe = () => {
         <Cards arr={datas}  />
        {/* list recipes end */}
         
-        <Buttons/>
+       <Buttons text={'View All Recipes'}/>
        
        <Footer/>
     </div>
