@@ -6,6 +6,7 @@ import { BadRequestError } from "../errors/badRequestError";
 import { ForBiddenError } from "../errors/ForbiddenError";
 import { createOtp } from "../service/otp";
 import { otpModel } from "../models/otpModel";
+import { sentEmailVerification } from "../service/sendMail";
 
 export const loginUser = async (req:Request,res:Response,next:NextFunction)=>{
    try {
@@ -115,6 +116,7 @@ export const signUpUser = async (req:Request,res:Response,next:NextFunction)=>{
            console.log("register otp",otp);
            const data = otpModel.build({email,otp})
            await data.save()
+           sentEmailVerification(email,otp)
            res.send({success:true})
       }
    } catch (error) {
@@ -125,7 +127,7 @@ export const signUpUser = async (req:Request,res:Response,next:NextFunction)=>{
 
 export const checkOtp = async(req:Request,res:Response,next:NextFunction) =>{
    try {
-       console.log(req.body,req.params);
+
        const {otp,email,password,name} = req.body;
       
        const check = await otpModel.findOne({email});
