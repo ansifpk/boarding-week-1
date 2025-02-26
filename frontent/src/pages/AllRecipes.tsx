@@ -71,11 +71,11 @@ const AllRecipes = () => {
             <SelectGroup>
               <SelectLabel>Sort</SelectLabel>
               <SelectItem value="All">All</SelectItem>
-              <SelectItem value="sort=price&sortDirection=desc">
-                Price High
+              <SelectItem value="&sort=popularity&sortDirection=desc">
+                Most Popular
               </SelectItem>
-              <SelectItem value="sort=price&sortDirection=asc">
-                Price Low
+              <SelectItem value="&sort=healthiness&sortDirection=desc">
+                Healthiest
               </SelectItem>
               <SelectItem value="sort=readyInMinutes&sortDirection=asc">
                 Coking Time Fast
