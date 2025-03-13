@@ -15,6 +15,7 @@ export class WishlistRoutes implements IRoutes{
       }
       private initializeRoutes() {
         this.router.get('/:userId',
+          this.authMiddleware.isAuth.bind(this.authMiddleware),
           this.wishlistController.getWishlist.bind(this.wishlistController)
         )
         this.router.patch('/:userId',
