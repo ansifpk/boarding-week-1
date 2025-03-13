@@ -17,7 +17,7 @@ app.use(json())
 app.use(urlencoded({ extended: true }));
 app.use(cookieParser())
 app.use(cors({
-    origin:['http://localhost:5173','https://boarding-week-1.vercel.app'],
+    origin:['http://localhost:5173','https://recipeworldcom.vercel.app'],
     credentials:true
     }))
 const userRouter = container.resolve(UserRoutes)
